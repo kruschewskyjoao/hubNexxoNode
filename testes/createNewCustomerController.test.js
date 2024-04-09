@@ -6,7 +6,7 @@ jest.mock('../services/createCustomerService.js');
 
 
 describe('createNewCustomerController', () => {
- it('shoule return 201 when name and email are informed', async() => {
+ it('should return 201 when name and email are informed', async() => {
   const mockCreateCustomer = {
     id: 1,
     name: 'Teste',

@@ -7,7 +7,6 @@ const filterByIdController = async (req, res) => {
     const filterId = await filterByIdService(id);
     res.status(201).json(filterId);
   } catch (error) {
-    console.error(error);
     res.status(404).send('Nenhum cliente encontrado.');
   }
 }

@@ -14,7 +14,6 @@ const updateCustomerByIdController = async (req, res) => {
     const response = await updateCustomerByIdService(id, dataToUpdate);
     res.status(201).json(response);
   } catch (error) {
-    console.error(error);
     res.status(404).send('Usuario não encontrado.');
   }
 }
