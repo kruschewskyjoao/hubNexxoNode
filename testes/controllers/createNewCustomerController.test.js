@@ -4,11 +4,11 @@ import createCustomerService from '../../services/createCustomerService.js';
 jest.mock('../../services/createCustomerService.js');
 
 describe('createNewCustomerController', () => {
- it('should return 201 when name and email are informed', async() => {
+ it('should return 200 when name and email are informed', async() => {
   const mockCreateCustomer = {
     id: 1,
     name: 'Teste',
-    email: 'teste@email.com'
+    cpfCnpj: '24971563792'
   };
 
   createCustomerService.mockResolvedValue(mockCreateCustomer);
@@ -16,7 +16,7 @@ describe('createNewCustomerController', () => {
   const req = {
     body: {
       name: 'Teste',
-      email: 'teste@email.com'
+      cpfCnpj: '24971563792'
     }
   };
 
@@ -27,7 +27,7 @@ describe('createNewCustomerController', () => {
 
   await createNewCustomerController(req, res);
 
-  expect(res.status).toHaveBeenCalledWith(201);
+  expect(res.status).toHaveBeenCalledWith(200);
   expect(res.json).toHaveBeenCalledWith(mockCreateCustomer);
  })
 
@@ -48,7 +48,7 @@ describe('createNewCustomerController', () => {
   expect(res.send).toHaveBeenCalledWith('Nome não informado');
  });
 
-  it('should return 400 when email is not informed', async() => {
+  it('should return 400 when cpf or email is not informed', async() => {
     const req = {
       body: {
         name: 'Teste'
@@ -62,6 +62,6 @@ describe('createNewCustomerController', () => {
     await createNewCustomerController(req, res);
   
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.send).toHaveBeenCalledWith('Email não informado');
+    expect(res.send).toHaveBeenCalledWith('CPF ou CNPJ não informado(s)');
   });
 });

@@ -11,6 +11,8 @@ const createCustomerService = async (body) => {
     body: JSON.stringify(body)
   };
     const response = await fetch(url, options);
+    if(response.status === 401) throw new Error('Unauthorized');
+    if(response.status === 400) throw new Error('invalid_cpfCnpj');
     const json = await response.json();
     return json;
 }
