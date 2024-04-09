@@ -1,7 +1,7 @@
-import filterByIdController from '../controllers/filterByIdController.js';
-import filterByIdService from '../services/filterByIdService.js';
+import filterByIdController from '../../controllers/filterByIdController.js';
+import filterByIdService from '../../services/filterByIdService.js';
 
-jest.mock('../services/filterByIdService.js');
+jest.mock('../../services/filterByIdService.js');
 
 describe('filterByIdController', () => {
   it('should return 400 if Id not informed', async () => {

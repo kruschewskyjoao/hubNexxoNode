@@ -1,7 +1,7 @@
-import filterByNameOrCnpjOrCpfController from "../controllers/filterByNameOrCnpjOrCpfController.js";
-import filterByNameOrCnpjOrCpfService from "../services/filterByNameOrCnpjOrCpfService.js";
+import filterByNameOrCnpjOrCpfController from "../../controllers/filterByNameOrCnpjOrCpfController.js";
+import filterByNameOrCnpjOrCpfService from "../../services/filterByNameOrCnpjOrCpfService.js";
 
-jest.mock('../services/filterByNameOrCnpjOrCpfService.js');
+jest.mock('../../services/filterByNameOrCnpjOrCpfService.js');
 
 describe('filterByNameOrCnpjOrCpfController', () => {
   it('should return 400 when name cnpj and cpf are not provided', async () => {

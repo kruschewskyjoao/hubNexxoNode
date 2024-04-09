@@ -1,7 +1,7 @@
-import deleteCustomerByIdController from '../controllers/deleteCustomerByIdController.js';
-import deleteCustomerByIdService from '../services/deleteCustomerByIdService.js';
+import deleteCustomerByIdController from '../../controllers/deleteCustomerByIdController.js';
+import deleteCustomerByIdService from '../../services/deleteCustomerByIdService.js';
 
-jest.mock('../services/deleteCustomerByIdService.js');
+jest.mock('../../services/deleteCustomerByIdService.js');
 
 describe('deleteCustomerByIdController', () => {
   it('should return 400 if id not informed', async () => {

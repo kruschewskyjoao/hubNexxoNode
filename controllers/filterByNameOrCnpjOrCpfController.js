@@ -1,7 +1,6 @@
 import filterByNameOrCnpjService from "../services/filterByNameOrCnpjOrCpfService.js";
 
 const filterByNameOrCnpjOrCpfController = async (req, res) => {
-  console.log(req.params)
   const { nameOrCnpj } = req.params;
   if (!nameOrCnpj) return res.status(400).send('Nome, CNPJ ou CPF não informado(s)');
   try {

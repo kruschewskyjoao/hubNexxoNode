@@ -1,7 +1,7 @@
-import updateCustomerByIdController from '../controllers/updateCostumerByIdController.js';
-import updateCustomerByIdService from '../services/updateCustomerByIdService.js';
+import updateCustomerByIdController from '../../controllers/updateCostumerByIdController.js';
+import updateCustomerByIdService from '../../services/updateCustomerByIdService.js';
 
-jest.mock('../services/updateCustomerByIdService.js');
+jest.mock('../../services/updateCustomerByIdService.js');
 
 describe('updateCustomerByIdController', () => {
   it('should return 400 if Id not informed', async () => {

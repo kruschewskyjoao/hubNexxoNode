@@ -1,7 +1,7 @@
-import createNewCustomerController from '../controllers/createNewCostumerController.js';
-import createCustomerService from '../services/createCustomerService.js';
+import createNewCustomerController from '../../controllers/createNewCostumerController.js';
+import createCustomerService from '../../services/createCustomerService.js';
 
-jest.mock('../services/createCustomerService.js');
+jest.mock('../../services/createCustomerService.js');
 
 describe('createNewCustomerController', () => {
  it('should return 201 when name and email are informed', async() => {
