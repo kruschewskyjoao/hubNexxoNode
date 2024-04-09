@@ -11,7 +11,6 @@ const createNewCostumerController = async (req, res) => {
     const createNew = await createCustomerService({ name, email, postalCode });
     res.status(201).json(createNew);
   } catch (error) {
-    console.error(error);
     res.status(500).send('Nome ou Email não foram informados');
   }
 }

@@ -7,7 +7,6 @@ const deleteCustomerByIdController = async (req, res) => {
     const filterId = await deleteCustomerByIdService(id);
     res.status(200).json(filterId);
   } catch (error) {
-    console.error(error);
     res.status(404).send('Nenhum cliente encontrado.');
   }
 }
