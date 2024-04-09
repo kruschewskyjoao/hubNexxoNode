@@ -10,6 +10,7 @@ const filterByNameOrCnpjOrCpfController = async (nameOrCnpj) => {
     }
   };
   const response = await fetch(url, options);
+  if(response.status === 401) throw new Error('Unauthorized');
   const json = await response.json();
   if(json.data.length === 0) throw new Error('Nenhum cliente encontrado.');
   return json;

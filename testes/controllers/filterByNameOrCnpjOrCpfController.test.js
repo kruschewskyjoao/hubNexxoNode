@@ -4,10 +4,9 @@ import filterByNameOrCnpjOrCpfService from "../../services/filterByNameOrCnpjOrC
 jest.mock('../../services/filterByNameOrCnpjOrCpfService.js');
 
 describe('filterByNameOrCnpjOrCpfController', () => {
-  it('should return 400 when name cnpj and cpf are not provided', async () => {
+  it('should return 400 when name cnpj pr cpf are not provided', async () => {
     const mockReq = {
       params: {},
-      query: {},
     };
     const mockRes = {
       status: jest.fn().mockReturnThis(),
@@ -20,7 +19,26 @@ describe('filterByNameOrCnpjOrCpfController', () => {
     expect(mockRes.send).toHaveBeenCalledWith('Nome, CNPJ ou CPF não informado(s)');
   });
 
-  it('should return 201 when nameOrCnpj is provided and service returns data', async () => {
+  it('should return 401 when service are unauthorized error', async () => {
+    const mockReq = {
+      params: {
+        nameOrCnpj: 'Testwwwww',
+      },
+    };
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    const mockError = { message: 'Unauthorized' };
+    filterByNameOrCnpjOrCpfService.mockRejectedValue(mockError);
+
+    await filterByNameOrCnpjOrCpfController(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(401);
+    expect(mockRes.send).toHaveBeenCalledWith('Unauthorized');
+  });
+
+  it('should return 200 when nameOrCnpj is provided and service returns data', async () => {
     const mockReq = {
       params: { nameOrCnpj: 'joao'},
     };
@@ -35,7 +53,7 @@ describe('filterByNameOrCnpjOrCpfController', () => {
 
     await filterByNameOrCnpjOrCpfController(mockReq, mockRes);
 
-    expect(mockRes.status).toHaveBeenCalledWith(201);
+    expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockJson).toHaveBeenCalledWith(mockData);
   });
 });
