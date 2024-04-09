@@ -1,0 +1,33 @@
+const returnFromApi = {
+  object: "customer",
+  id: "cus_000005958015",
+  dateCreated: "2024-04-09",
+  name: "JOAO",
+  email: null,
+  company: null,
+  phone: null,
+  mobilePhone: null,
+  address: null,
+  addressNumber: null,
+  complement: null,
+  province: null,
+  postalCode: null,
+  cpfCnpj: "24971563792",
+  personType: "FISICA",
+  deleted: false,
+  additionalEmails: null,
+  externalReference: null,
+  notificationDisabled: false,
+  observations: null,
+  municipalInscription: null,
+  stateInscription: null,
+  canDelete: true,
+  cannotBeDeletedReason: null,
+  canEdit: true,
+  cannotEditReason: null,
+  city: null,
+  state: null,
+  country: "Brasil"
+};
+
+export default returnFromApi;
