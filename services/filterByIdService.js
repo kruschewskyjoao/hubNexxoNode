@@ -10,8 +10,9 @@ const filterByIdService = async (id) => {
     }
   }
   const response = await fetch(url, options);
+  if(response.status === 401) throw new Error('Unauthorized');
   const json = await response.json();
-  if(json.deleted === true) throw new Error("Usuário deletado.")
+  if(json.deleted === true) throw new Error();
   return json;
 }
 

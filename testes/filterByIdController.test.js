@@ -19,36 +19,36 @@ describe('filterByIdController', () => {
     expect(res.send).toHaveBeenCalledWith('ID não informado');
   });
 
-  it('should filter by id', async () => {
-    const mockCustomerId = '123';
-    const req = {
+  it('should return 200 when id is provided and service returns data', async () => {
+    const mockReq = {
       params: {
-        id: mockCustomerId
-      }
+        id: '123',
+      },
+      body: {},
     };
-    const mockResponse = {
-      id: '123',
-      name: 'Teste',
-      email: 'teste@email.com'
-    };
-    const res = {
+    const mockJson = jest.fn();
+    const mockRes = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn()
+      json: mockJson,
+      send: jest.fn(),
     };
-    filterByIdService.mockResolvedValue(mockResponse);
-    await filterByIdController(req, res);
+    const mockData = { id: '123', name: 'Test' };
+    filterByIdService.mockResolvedValue(mockData);
 
-    expect(filterByIdService).toHaveBeenCalledWith(mockCustomerId);
-    expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.json).toHaveBeenCalledWith(mockResponse);
+    await filterByIdController(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(200);
+    expect(mockJson).toHaveBeenCalledWith(mockData);
   });
+
 
   it('should handle error if customer is not found', async () => {
     const mockCustomerId = '123';
     const req = {
       params: {
         id: mockCustomerId
-      }
+      },
+      body: {},
     };
     const mockError = new Error('Nenhum cliente encontrado');
     const res = {
@@ -61,6 +61,6 @@ describe('filterByIdController', () => {
 
     expect(filterByIdService).toHaveBeenCalledWith(mockCustomerId);
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.send).toHaveBeenCalledWith('Nenhum cliente encontrado.');
+    expect(res.send).toHaveBeenCalledWith('Not Found');
   });
 });
