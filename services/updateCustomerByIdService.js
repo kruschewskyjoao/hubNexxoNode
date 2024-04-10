@@ -7,11 +7,12 @@ const updateCustomerByIdService = async (id, data) => {
     headers: {
       accept: 'application/json',
       'content-type': 'application/json',
-      access_token: variableOptions.api
+      access_token: variableOptions.api,
     },
     body: JSON.stringify(data)
   };
   const response = await fetch(url, options);
+  if(response.status === 401) throw new Error('Unauthorized');
   const json = await response.json();
   if(json.errors || json.deleted === true) throw new Error(json.errors[0].description);
   return json;

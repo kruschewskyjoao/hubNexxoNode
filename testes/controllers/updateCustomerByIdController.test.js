@@ -1,75 +1,119 @@
-import updateCustomerByIdController from "../../controllers/updateCostumerByIdController.js";
-import updateCustomerByIdService from "../../services/updateCustomerByIdService.js";
+import updateCustomerByIdController from '../../controllers/updateCostumerByIdController.js';
+import updateCustomerByIdService from '../../services/updateCustomerByIdService.js';
 
 jest.mock('../../services/updateCustomerByIdService.js');
 
 describe('updateCustomerByIdController', () => {
-  it('should return 400 id is not informed', async () => {
-    const mockReq = {
-      params: {},
-      body: {},
+  it('should return 400 if Id not informed', async () => {
+    const req = {
+      params: {}
     };
-    const mockRes = {
+    const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      send: jest.fn()
     };
 
-    await updateCustomerByIdController(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.send).toHaveBeenCalledWith('ID não informado');
+    await updateCustomerByIdController(req, res);
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.send).toHaveBeenCalledWith('ID não informado');
   });
 
-  it('should return 400 when name or email are empty', async () => {
-    const mockReq = {
-      params: { id: '123321' },
-      body: {},
+  it('should return 400 if name or email are not informed', async () => {
+    const mockCustomerId = '321123';
+    const req = {
+      params: {
+        id: mockCustomerId,
+      },
+      body: {}
     };
-    const mockRes = {
+    const res = {
       status: jest.fn().mockReturnThis(),
-      send: jest.fn(),
+      send: jest.fn()
     };
 
-    await updateCustomerByIdController(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.send).toHaveBeenCalledWith('Nome ou email não informado(s)');
+    await updateCustomerByIdController(req, res);
+    expect(res.status).toHaveBeenCalledWith(404);
+    expect(res.send).toHaveBeenCalledWith('Not Found');
   });
 
-  it('should return 201 when id name and email are valid and service returns some data', async () => {
-    const mockReq = {
-      params: { id: '123123' },
-      body: { name: 'TestTest', email: 'test1@test.com' },
+  it('should update customer by Id', async () => {
+    const mockCostumerId = '71988';
+    const mockDataToUpdate = {
+      name: 'Joaozinhoinho',
+      email: 'Joaozinhoinho@imeio.com'
     };
-    const mockJson = jest.fn();
-    const mockRes = {
+    const req = {
+      params: {
+        id: mockCostumerId
+      },
+      body: mockDataToUpdate
+    };
+    const mockResponse = {
+      id: '71988',
+      name: 'Joaozinhoinho',
+      email: 'Joaozinhoinho@imeio.com'
+    };
+    const res = {
       status: jest.fn().mockReturnThis(),
-      json: mockJson,
-      send: jest.fn(),
+      json: jest.fn()
     };
-    const mockData = { id: '123123', name: 'TestTest', email: 'test1@test.com' };
-    updateCustomerByIdService.mockResolvedValue(mockData);
 
-    await updateCustomerByIdController(mockReq, mockRes);
+    updateCustomerByIdService.mockResolvedValue(mockResponse);
+    await updateCustomerByIdController(req, res);
 
-    expect(mockRes.status).toHaveBeenCalledWith(201);
-    expect(mockJson).toHaveBeenCalledWith(mockData);
+    expect(updateCustomerByIdService).toHaveBeenCalledWith(mockCostumerId, mockDataToUpdate);
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith(mockResponse);
   });
 
-  it('should return 404 service break', async () => {
-    const mockReq = {
-      params: { id: '123' },
-      body: { name: 'Test', email: 'test@test.com' },
+  it('should handle error if customer not exists', async () => {
+    const mockCostumerId = '12397412907401';
+    const mockDataToUpdate = {
+      name: 'qualquer',
+      email: 'qq@email.com'
+    };
+    const req = {
+      params: {
+        id: mockCostumerId
+      },
+      body: mockDataToUpdate
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn()
+    };
+
+    const mockError = new Error('Cliente não encontrado');
+
+    updateCustomerByIdService.mockRejectedValue(mockError);
+    await updateCustomerByIdController(req, res);
+
+    expect(updateCustomerByIdService).toHaveBeenCalledWith(mockCostumerId, mockDataToUpdate);
+    expect(res.status).toHaveBeenCalledWith(404);
+    expect(res.send).toHaveBeenCalledWith('Not Found');
+  });
+  it('should return 401 when service are unauthorized error', async () => {
+    const mockCostumerId = '12397412907401';
+    const mockDataToUpdate = {
+      name: 'qualquer',
+      email: 'qq@email.com'
+    };
+    const req = {
+      params: {
+        id: mockCostumerId
+      },
+      body: mockDataToUpdate
     };
     const mockRes = {
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
     };
-    updateCustomerByIdService.mockRejectedValue(new Error());
+    const mockError = { message: 'Unauthorized' };
+    updateCustomerByIdService.mockRejectedValue(mockError);
 
-    await updateCustomerByIdController(mockReq, mockRes);
+    await updateCustomerByIdController(req, mockRes);
 
-    expect(mockRes.status).toHaveBeenCalledWith(404);
-    expect(mockRes.send).toHaveBeenCalledWith('Usuario não encontrado.');
+    expect(mockRes.status).toHaveBeenCalledWith(401);
+    expect(mockRes.send).toHaveBeenCalledWith('Unauthorized');
   });
 });
