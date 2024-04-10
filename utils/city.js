@@ -14,10 +14,8 @@ const searchCity = async (id) => {
   try {
     const response = await fetch(url, options);
     const json = await response.json();
-    console.log(json)
     return json;
   } catch (error) {
-    console.error('Erro ao obter Cidade:', error);
     throw error;
   }
 }
