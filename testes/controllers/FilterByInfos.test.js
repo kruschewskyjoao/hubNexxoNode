@@ -56,4 +56,19 @@ describe('filterByInfosController', () => {
     expect(mockRes.status).toHaveBeenCalledWith(200);
     expect(mockJson).toHaveBeenCalledWith(mockData);
   });
+  it('should return 403 when there is something in the request body', async () => {
+    const mockReq = {
+      params: { infos: 'joao' },
+      body: { email: 'joao@joao.com' },
+    };
+    const mockRes = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+
+    await filterByInfosController(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(403);
+    expect(mockRes.send).toHaveBeenCalledWith('Você enviou algo no body da requisição, chamadas de método GET precisam ter um body vazio.');
+  });
 });
