@@ -9,7 +9,7 @@ Documentação - https://docs.asaas.com/docs/criando-um-cliente
 No arquivo .env.example tem alguns exemplos de como utilizar.
 Depois só criar o arquivo .env baseado no exemplo. API_PORT=3001 e HOST_NAME=127.0.0.1 - acredito não ser dados importantes.
 
-### Utilizei para a construção Express, babel, nodemon, dotenv, jest, is-email e 'julioakira/cpf-cnpj-utils'
+### Utilizei para a construção da aplicação: Express, babel, nodemon, dotenv, jest, is-email e 'julioakira/cpf-cnpj-utils'.
 
 ## Para rodar a aplicação sem Docker:
 Utilizei a versão v20.12.1 LTS do Node.Js, então é recomendado estar atualizado para que seja possível rodar corretamente a aplicação.
