@@ -7,7 +7,7 @@ Documentação - https://docs.asaas.com/docs/criando-um-cliente
 
 ## Importante: Para a segurança foi utilizado variáveis de ambiente. Primeiro vá no https://sandbox.asaas.com/dashboard/index procure pelo icone de perfil no canto superior da tela, depois vá em Integrações (https://sandbox.asaas.com/customerConfigIntegrations/index). E gere uma nova chave de API para poder realizar os testes.
 No arquivo .env.example tem alguns exemplos de como utilizar.
-Depois só criar o arquivo .env baseado no exemplo.
+Depois só criar o arquivo .env baseado no exemplo. API_PORT=3001 e HOST_NAME=127.0.0.1 - acredito não ser dados importantes.
 
 ### Utilizei para a construção Express, babel, nodemon, dotenv, jest, is-email e 'julioakira/cpf-cnpj-utils'
 
@@ -52,37 +52,58 @@ E para parar a imagem:
 
 # Com a aplicação rodando:
 
+
 - Temos POST /newcustomer para a criação de um novo cliente. Aqui o body é obrigatorio ter name e cpfCnpj.
 Exemplo de body válido:
+
 {
+
 	"name": "JOAO",
 	"cpfCnpj": "30306294000145",
 	"email": "joao@gmail.com"
 }
+
 Ou caso queira com algumas informações a mais:
+
 {
+
 	"name": "JOAO",
 	"cpfCnpj": "30306294000145",
 	"email": "joao@gmail.com",
 	"postalCode": "41750166"
 }
 
+______________________________
 - Temos um GET /customers/:infos, onde conseguimos listar clientes específicos utilizando alguma informação como o email, nome, cpf ou cnpj dele. Também pode utilizar offset ou limit nas opções para ajudar na pesquisa.
 Exemplo de parametro baseado no usuario criado anteriormente:
-/customers/joao@gmail.com
-/customers/joao
-/customers/30306294000145
-/customers/30306294000145&limit=1
+
+-     /customers/joao@gmail.com
+
+-     /customers/joao
+
+-     /customers/30306294000145
+
+-     /customers/30306294000145&limit=1
+______________________________
 
 - Temos um GET /customer/:id que é onde conseguimos recuperar um único cliente baseado em ID. Exemplo:
-/customer/cus_000005958312
+-     /customer/cus_000005958312
 
+
+______________________________
 - Temos um PUT /customer/:id para editar informações baseadas no ID de um cliente.
-/customer/cus_000005958312
+
+-     /customer/cus_000005958312
+
 No body podemos ter name, email ou os dois:
+
 {
+
 	"name": "JOAO"
+
 }
 
+______________________________
 - Temos o DELETE /customers/:id para remover um cliente baseado no ID dele. Exemplo:
-/customers/cus_000005958157
+
+-     /customers/cus_000005958157
