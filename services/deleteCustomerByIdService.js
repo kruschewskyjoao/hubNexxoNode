@@ -10,6 +10,7 @@ const deleteCustomerByIdService = async (id) => {
     }
   };
   const response = await fetch(url, options);
+  if(response.status === 401) throw new Error('Unauthorized');
   const json = await response.json();
   return json;
 }

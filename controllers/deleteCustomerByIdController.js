@@ -7,7 +7,10 @@ const deleteCustomerByIdController = async (req, res) => {
     const filterId = await deleteCustomerByIdService(id);
     res.status(200).json(filterId);
   } catch (error) {
-    res.status(404).send('Nenhum cliente encontrado.');
+    if(error.message === 'Unauthorized') {
+      return res.status(401).send('Unauthorized');
+    }
+    res.status(404).send('Not Found');
   }
 }
 

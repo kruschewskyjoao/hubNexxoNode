@@ -29,7 +29,7 @@ describe('deleteCustomerByIdController', () => {
     };
 
     const responseDelete = {
-      message: 'Cliente excluído com sucesso'
+      message: 'deleted'
     };
 
     deleteCustomerByIdService.mockResolvedValue(responseDelete);
@@ -55,7 +55,7 @@ describe('deleteCustomerByIdController', () => {
       }
     };
 
-    const mockErrorResponse = new Error('Cliente não encontrado');
+    const mockErrorResponse = new Error('Not Found');
 
     deleteCustomerByIdService.mockRejectedValue(mockErrorResponse);
 
@@ -68,6 +68,6 @@ describe('deleteCustomerByIdController', () => {
 
     expect(deleteCustomerByIdService).toHaveBeenCalledWith(mockCustomerId);
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.send).toHaveBeenCalledWith('Nenhum cliente encontrado.');
+    expect(res.send).toHaveBeenCalledWith('Not Found');
   });
 });
