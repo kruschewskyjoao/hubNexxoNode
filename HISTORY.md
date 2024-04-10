@@ -15,4 +15,4 @@ Quando estava começando a fazer o projeto, fiquei na dúvida sobre qual linguag
 - Python/Flask
 
 
-Por último, até comecei a trabalhar com o runtime [Bun](https://bun.sh/) e [ElysiaJS](https://elysiajs.com/), que me pareceram bastante promissores! Escrevi algumas linhas até que o receio bateu e voltei para o Node, que já conhecia e me sentia mais confortável para entregar mais em menos tempo. No entanto, hoje, se estivesse construindo algo, optaria por ElysiaJS ou Go.
+Por último, até comecei a trabalhar com o runtime [Bun](https://bun.sh/) e [ElysiaJS](https://elysiajs.com/), que me pareceram bastante promissores! Escrevi algumas linhas até que o receio bateu e voltei para o Node, que já conhecia e me sentia mais confortável para entregar mais em menos tempo. No entanto, hoje, se estivesse construindo algo, optaria por ElysiaJS ou Go. Até tinha começado a ver o elysia e abri um [pr](https://github.com/kruschewskyjoao/hubNexxoElysia), mas acabei deixando de lado.
