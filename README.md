@@ -107,3 +107,6 @@ ______________________________
 - Temos o DELETE /customers/:id para remover um cliente baseado no ID dele. Exemplo:
 
 -     /customers/cus_000005958157
+
+
+teste aprovação
